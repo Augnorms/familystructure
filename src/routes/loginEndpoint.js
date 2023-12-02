@@ -32,7 +32,7 @@ router.get("/", (req, res)=>{
                 expiresIn: "1h", 
             });
 
-            db.query("SELECT loginId, password, email, firstname, lastname FROM logins Where username = ?", [username], (err, response)=>{
+            db.query("SELECT loginId, password, email, firstname, lastname, isadmin FROM logins Where username = ?", [username], (err, response)=>{
                 if(err){
                     res.status(401).json({
                         message:"Failed to fetch"

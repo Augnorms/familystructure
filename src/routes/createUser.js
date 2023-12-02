@@ -5,14 +5,14 @@ const router = express.Router();
 const bycrypt = require("bcrypt");
 
 router.post("/", async(req, resp)=>{
-    const {username, password, firstname, lastname, email} = req.body;
+    const {username, password, firstname, lastname, email, isadmin} = req.body;
 
     try{
         const hashedpassword = await bycrypt.hash(password, 10);
 
         db.query(
-            'INSERT INTO logins (username, password, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)',
-            [username, hashedpassword, firstname, lastname, email],
+            'INSERT INTO logins (username, password, firstname, lastname, email, isadmin) VALUES (?, ?, ?, ?, ?, ?)',
+            [username, hashedpassword, firstname, lastname, email, isadmin],
             (err, users)=>{
 
                if(err){
