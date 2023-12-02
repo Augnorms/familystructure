@@ -21,13 +21,23 @@ router.get("/:id", (req, res)=>{
             message:"Failed to get data for this user id " +loginuserId +" "+ err.message
         });
     }else{
-        res.status(201).json({
-            success:true,
-            code:201,
-            message:"data available for userid"+ loginuserId,
-            data:resdata[0],
-            isadmin:resdata[0].isadmin === 1 ? true : false 
-        });
+        const userData = resdata[0];
+        
+        const responseData = {
+            id: userData.id,
+            username: userData.username,
+            firstname: userData.firstname,
+            lastname: userData.lastname,
+            email: userData.email,
+            isadmin: userData.isadmin === 1 ? true : false,
+          };
+  
+          res.status(201).json({
+            success: true,
+            code: 201,
+            message: "data available for userid" + loginuserId,
+            data: responseData,
+          });
     }
    });
 });
