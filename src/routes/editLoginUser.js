@@ -2,14 +2,19 @@ const express = require("express");
 const db = require("../dbconnect");
 const router = express.Router();
 
-router.put("/", (req, res) => {
-    const { userid, username, firstname, lastname, email, isadmin } = req.body;
-    const isAdminValue = isadmin ? 1 : 0;
+router.put("/",(req, resp)=>{
+  const userid = req.body.userid;
+  const username = req.body.username;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const email = req.body.email
+  const isadmin = req.body.isadmin;
+  const isAdmin = isadmin === "true" ? 1 : 0;
 
     db.query(
         "UPDATE logins SET username = ?, firstname = ?, lastname = ?, email = ?, isadmin = ? WHERE loginId = ? LIMIT 1",
-        [username, firstname, lastname, email, isAdminValue, userid],
-        (err, updateResult) => {
+        [username, firstname, lastname, email, isAdmin, userid],
+        (err, res) => {
             if (err) {
                 console.error("Database error:", err);
                 res.status(500).json({
@@ -33,7 +38,7 @@ router.put("/", (req, res) => {
                         } else {
                             const updatedUser = selectResult[0]; // Assuming there's only one result
 
-                            res.status(200).json({
+                            resp.status(200).json({
                                 success: true,
                                 code: 200,
                                 message: "User has been updated successfully.",
@@ -46,7 +51,5 @@ router.put("/", (req, res) => {
         }
     );
 });
-
-
 
 module.exports = router;
