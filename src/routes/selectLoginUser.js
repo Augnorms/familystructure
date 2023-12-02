@@ -25,7 +25,8 @@ router.get("/:id", (req, res)=>{
             success:true,
             code:201,
             message:"data available for userid"+ loginuserId,
-            data:resdata[0]
+            data:resdata[0],
+            isadmin:resdata[0].isadmin === 1 ? true : false 
         });
     }
    });
