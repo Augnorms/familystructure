@@ -22,9 +22,9 @@ router.get("/:id", (req, res)=>{
         });
     }else{
         const userData = resdata[0];
-        
+
         const responseData = {
-            id: userData.id,
+            id: userData.loginId,
             username: userData.username,
             firstname: userData.firstname,
             lastname: userData.lastname,
