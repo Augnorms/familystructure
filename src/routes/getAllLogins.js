@@ -21,7 +21,7 @@ router.get("/", (req, res)=>{
             success:true,
             code:201,
             message:"data available",
-            data:resdata[0]
+            data:resdata
          });
        }
     });
