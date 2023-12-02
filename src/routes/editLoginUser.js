@@ -4,9 +4,10 @@ const router = express.Router();
 
 router.put("/", (req, res)=>{
     const {userid, username, firstname, lastname, email, isadmin} = req.body;
+    const isAdminValue = isadmin ? 1 : 0;
     
     db.query("UPDATE logins SET username = ?, firstname = ?, lastname = ?, email = ?, isadmin = ? WHERE loginId = ? LIMIT 1",
-    [username, firstname, lastname, email, isadmin, userid],
+    [username, firstname, lastname, email, isAdminValue, userid],
     (err, resdata)=>{
       if(err){
         res.status(401).json({
