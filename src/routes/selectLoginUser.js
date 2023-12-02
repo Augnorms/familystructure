@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/:id", (req, res)=>{
    const loginuserId = req.params.id
    
-   db.query("SELECT loginId, username, password, firstname, lastname, email, isadmin FROM login where loginId = ?",
+   db.query("SELECT loginId, username, password, firstname, lastname, email, isadmin FROM logins where loginId = ?",
    [loginuserId],
    (err, resdata)=>{
     if(err){
