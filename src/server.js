@@ -9,6 +9,7 @@ const selectloginuser = require("./routes/selectLoginUser");
 const editloginuser = require("./routes/editLoginUser");
 
 app.use(express.json());
+app.use(cors());
 
 //routers defined here
 app.use("/createuser", createUser);

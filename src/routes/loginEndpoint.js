@@ -2,61 +2,67 @@ const express = require("express");
 const db = require("../dbconnect");
 const jwtoken = require("jsonwebtoken");
 const router = express.Router();
-const bycrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
+router.post("/", (req, res) => {
+  const { username, password, rememberMe } = req.body;
 
-router.get("/", (req, res)=>{
-    const {username, password} = req.body;
-    
-    db.query('SELECT username, password FROM logins WHERE username = ?', 
-    [username], 
-    (err, resData)=>{
-       if(err){
+  db.query(
+    'SELECT username, password FROM logins WHERE username = ?',
+    [username],
+    (err, resData) => {
+      if (err) {
         res.status(401).json({
-          success:false,
-          code:401,
-          message:"Failed to login username, password incorrect"
+          success: false,
+          code: 401,
+          message: "Failed to login username, password incorrect",
         });
-       }else if(resData.length === 0){
+      } else if (resData.length === 0) {
         res.status(401).json({
-            success:false,
-            code:401,
-            message:"Failed to login username, password incorrect"
-          });
-       }else{
-         const user = resData[0]
-         const isPassword = bycrypt.compare(password, user.password);
+          success: false,
+          code: 401,
+          message: "Failed to login No such data",
+        });
+      } else {
+        const user = resData[0];
+        bcrypt.compare(password, user.password).then((isPassword) => {
+          if (isPassword) {
+            const token = jwtoken.sign(
+              { username: user.username },
+              "validate12345",
+              { expiresIn: rememberMe === true ? "2h" : "1h"}
+            );
 
-         if(isPassword){
-            const token = jwtoken.sign({ username: user.username }, "validate12345", {
-                expiresIn: "1h", 
-            });
-
-            db.query("SELECT loginId, password, email, firstname, lastname, isadmin FROM logins Where username = ?", [username], (err, response)=>{
-                if(err){
-                    res.status(401).json({
-                        message:"Failed to fetch"
-                    });
-                }else{
-                    res.status(201).json({
-                        success:true,
-                        code:201,
-                        message:"login successful",
-                        token:token,
-                        data:response
-                    });
+            db.query(
+              "SELECT loginId, password, email, firstname, lastname, isadmin FROM logins Where username = ?",
+              [username],
+              (err, response) => {
+                if (err) {
+                  res.status(401).json({
+                    message: "Failed to fetch",
+                  });
+                } else {
+                  res.status(201).json({
+                    success: true,
+                    code: 201,
+                    message: "login successful",
+                    token: token,
+                    data: response,
+                  });
                 }
-            });
-         }else{
+              }
+            );
+          } else {
             res.status(401).json({
-                success:false,
-                code:401,
-                message:"Failed to login username, password incorrect"
-              });
-         }
-       }
-    });
-
+              success: false,
+              code: 401,
+              message: "Failed to login username, or password incorrect",
+            });
+          }
+        });
+      }
+    }
+  );
 });
 
 module.exports = router;
