@@ -6,7 +6,7 @@ const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginEndpoint");
 const getalllogins = require("./routes/getAllLogins");
 const selectloginuser = require("./routes/selectLoginUser");
-const editloginuser = require("./routes/editLoginUser");
+const emailVerification = require("./routes/emailVerification");
 
 app.use(express.json());
 app.use(cors());
@@ -16,7 +16,7 @@ app.use("/createuser", createUser);
 app.use("/login", loginUser);
 app.use("/getalllogins", getalllogins);
 app.use("/selectloginuser", selectloginuser);
-app.use("/editloginuser", editloginuser);
+app.use("/emailverification", emailVerification);
 
 let port = 4000;
 
