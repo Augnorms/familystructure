@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
             const token = jwtoken.sign(
               { username: user.username },
               "validate12345",
-              { expiresIn: rememberMe === true ? 7200  : 3600}
+              { expiresIn: rememberMe === true ? 3600  : 1800}
             );
 
             db.query(
