@@ -12,6 +12,15 @@ router.get("/", async(req, res)=>{
         message:"success",
         data:response
      })
+
+   }else if(response.length == 0){
+    res.status(201).json({
+        code:201,
+        status:true,
+        message:" data empty for now",
+        data:[]
+     })
+
    }else{
     res.status(400).json({
         code:400,

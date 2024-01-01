@@ -8,6 +8,7 @@ const emailVerification = require("./routes/emailVerification");
 const verification = require("./routes/verification");
 const resetpassword = require("./routes/resetpassword");
 const getalluers = require("./dashboardRoutes/getallusers");
+const getallverifications = require("./dashboardRoutes/getallverifictions");
 
 app.use(express.json());
 app.use(cors());
@@ -19,6 +20,7 @@ app.use("/emailverification", emailVerification);
 app.use("/verification", verification);
 app.use("/resetpassword", resetpassword);
 app.use("/getalluers", getalluers);
+app.use("/getallverifications", getallverifications);
 
 let port = 4000;
 
