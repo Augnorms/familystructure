@@ -7,6 +7,7 @@ const loginUser = require("./routes/loginEndpoint");
 const emailVerification = require("./routes/emailVerification");
 const verification = require("./routes/verification");
 const resetpassword = require("./routes/resetpassword");
+const getalluers = require("./dashboardRoutes/getallusers");
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +18,7 @@ app.use("/login", loginUser);
 app.use("/emailverification", emailVerification);
 app.use("/verification", verification);
 app.use("/resetpassword", resetpassword);
+app.use("/getalluers", getalluers);
 
 let port = 4000;
 
