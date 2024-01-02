@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.get("/", async(req, res)=>{
-    const [response] = await db.promise().query("SELECT * FROM verification_codes;");
+    const [response] = await db.promise().query("SELECT * FROM verification_codes ORDER BY id DESC;");
 
     if(response.length > 0){
         res.status(200).json({

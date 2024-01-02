@@ -3,7 +3,7 @@ const db = require("../dbconnect");
 const router = express.Router();
 
 router.get("/", async(req, res)=>{
-   const [response] = await db.promise().query("SELECT * FROM logins")
+   const [response] = await db.promise().query("SELECT * FROM logins ORDER BY loginId DESC")
    
    if(response.length > 0){
      res.status(200).json({
