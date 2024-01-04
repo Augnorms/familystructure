@@ -9,6 +9,9 @@ const verification = require("./routes/verification");
 const resetpassword = require("./routes/resetpassword");
 const getalluers = require("./dashboardRoutes/getallusers");
 const getallverifications = require("./dashboardRoutes/getallverifictions");
+const createprofile = require("./dashboardRoutes/createuserprofil");
+const getuserprofile = require("./dashboardRoutes/getuserprofile");
+const updateuserprofile = require("./dashboardRoutes/updateuserprofile");
 
 app.use(express.json());
 app.use(cors());
@@ -21,6 +24,9 @@ app.use("/verification", verification);
 app.use("/resetpassword", resetpassword);
 app.use("/getalluers", getalluers);
 app.use("/getallverifications", getallverifications);
+app.use("/createprofile", createprofile);
+app.use("/getuserprofile",getuserprofile);
+app.use("/updateuserprofile", updateuserprofile);
 
 let port = 4000;
 
