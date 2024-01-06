@@ -12,6 +12,10 @@ const getallverifications = require("./dashboardRoutes/getallverifictions");
 const createprofile = require("./dashboardRoutes/createuserprofil");
 const getuserprofile = require("./dashboardRoutes/getuserprofile");
 const updateuserprofile = require("./dashboardRoutes/updateuserprofile");
+const creatmembers = require("./MembersRoute/createmembers");
+const getallmembers = require("./MembersRoute/getallmebers");
+const createrelationship = require("./MembersRoute/createrelationship");
+const hierarchy = require("./MembersRoute/hierarchy");
 
 app.use(express.json());
 app.use(cors());
@@ -27,6 +31,10 @@ app.use("/getallverifications", getallverifications);
 app.use("/createprofile", createprofile);
 app.use("/getuserprofile",getuserprofile);
 app.use("/updateuserprofile", updateuserprofile);
+app.use("/creatmember", creatmembers);
+app.use("/getallmembers", getallmembers);
+app.use("/createrelationship", createrelationship);
+app.use("/hierarchy", hierarchy);
 
 let port = 4000;
 
