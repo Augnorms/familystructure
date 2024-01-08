@@ -19,6 +19,9 @@ const hierarchy = require("./MembersRoute/hierarchy");
 const allmemmbers = require("./Allmembers/createallmembers");
 const fetchallmembers = require("./Allmembers/fetchAllmembers");
 const fetchmemberbyid = require("./Allmembers/fetchmemberbyid");
+const updatemember = require("./Allmembers/updatemember");
+const deletemember = require("./Allmembers/Deletemember");
+const allmemberscount = require("./SummaryRoutes/allmemberscount");
 
 app.use(express.json());
 app.use(cors());
@@ -41,6 +44,9 @@ app.use("/hierarchy", hierarchy);
 app.use("/allmemmbers", allmemmbers);
 app.use("/fetchallmembers", fetchallmembers);
 app.use("/fetchmemberbyid", fetchmemberbyid);
+app.use("/updatemember", updatemember);
+app.use("/deletemember", deletemember);
+app.use("/allmemberscount", allmemberscount);
 
 let port = 4000;
 
