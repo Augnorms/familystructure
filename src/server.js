@@ -22,6 +22,8 @@ const fetchmemberbyid = require("./Allmembers/fetchmemberbyid");
 const updatemember = require("./Allmembers/updatemember");
 const deletemember = require("./Allmembers/Deletemember");
 const allmemberscount = require("./SummaryRoutes/allmemberscount");
+const allfemalecount = require("./SummaryRoutes/allfemalecount");
+const allmales = require("./SummaryRoutes/allmelecount");
 
 app.use(express.json());
 app.use(cors());
@@ -47,6 +49,8 @@ app.use("/fetchmemberbyid", fetchmemberbyid);
 app.use("/updatemember", updatemember);
 app.use("/deletemember", deletemember);
 app.use("/allmemberscount", allmemberscount);
+app.use("/allfemalecount", allfemalecount);
+app.use("/allmales", allmales);
 
 let port = 4000;
 
